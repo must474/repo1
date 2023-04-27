@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from ..serializers import Loginserializer
+from serializers.Login import Loginserializer
 from django.http import HttpResponse
 from rest_framework.views import APIView
 

@@ -13,7 +13,7 @@ class BaseModel(models.Model):
 class Blog(BaseModel):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="blogs")
     title=models.CharField(max_length=50)
-    text=models.CharField(max_length=1000)
+    text=models.TextField()
     image=models.ImageField(upload_to="blogs")
 
     def __str__(self) -> str:
