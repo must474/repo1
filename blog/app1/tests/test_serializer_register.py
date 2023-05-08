@@ -1,6 +1,6 @@
 from django.test import TestCase
 from unittest.mock import Mock, patch,call
-from app1.serializers import Registerserializer
+from app1.serializers.Register import Registerserializer
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
@@ -32,8 +32,7 @@ class RegisterSerializerTestCase(TestCase):
         mock_query = Mock()
         
         def mock_filter_by_email(*args, **kwargs):
-            print('kwargs')
-            print(kwargs)
+
             if 'email' in kwargs:
                 mock_query.exists.return_value = True
                 return mock_query
@@ -42,8 +41,7 @@ class RegisterSerializerTestCase(TestCase):
                 return mock_query
         
         mock_filter.side_effect = mock_filter_by_email
-        # the first call to filter() with email arg returns the mock_query object
-        # the second call to filter() with username arg returns an empty queryset
+
 
         data = {
             "username": "johndoe",
@@ -53,19 +51,15 @@ class RegisterSerializerTestCase(TestCase):
 
         serializer = Registerserializer(data=data)
         serializer.is_valid()
-        print("---------")
-        print(serializer.errors)
-        print("---------")
 
         error_message = serializer.errors.get('email')[0]
         self.assertEqual(error_message, 'email had been taken')
 
-        # assert filter() was called twice with the expected arguments
+
         mock_filter.assert_has_calls([
             call(email="johndoe@example.com".lower()),
         ])
 
-        # assert exists() method was called once for the email field
         
 
     def test_validate_password(self):

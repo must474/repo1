@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'app1',
     'rest_framework',
     'home',
-    'corsheaders'
+    'corsheaders',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -38,6 +39,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app1.custom_middleware.CustomMiddleware'
 ]
 
 ROOT_URLCONF = 'blog.urls'

@@ -16,7 +16,7 @@ class Loginserializer(serializers.Serializer):
     def get_tokens_for_user(self,data):
         user=authenticate(username=data["username"],password=data["password"])
         if not user:
-             raise ({"message":"invalid credentials"})
+             raise serializers.ValidationError("invalid credentials")
         refresh = RefreshToken.for_user(user)
 
         return {
